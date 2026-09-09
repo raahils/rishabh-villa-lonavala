@@ -4,7 +4,6 @@ export const villaDetails = {
   location: "Lonavala, Maharashtra, India",
   shortLocation: "Lonavala, Maharashtra",
   landmark: "Lonavala",
-  googleMapsUrl: "https://www.google.com/maps?q=Rishabh+Villa+Lonavala",
   googleReviewsUrl: "https://www.google.com/search?q=rishabh+villa+lonavala+reviews",
   
   contactPhone: "+91 98213 42166",
@@ -60,7 +59,7 @@ export const guestReviews = [
     rating: 5,
     avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80",
     title: "Immaculate Cleanliness & Helpful Caretaker",
-    comment: "The property is extremely well-maintained and clean. The location in Lonavala is very peaceful and easy to find on Google Maps."
+    comment: "The property is extremely well-maintained and clean. The location in Lonavala is very peaceful and easy to access for group stays."
   },
   {
     name: "Pooja & Sameer Joshi",

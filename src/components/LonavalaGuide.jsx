@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sparkles, Navigation, MapPin, ExternalLink } from 'lucide-react';
+import { Sparkles, Navigation, Star, ExternalLink } from 'lucide-react';
 import { lonavalaAttractions, villaDetails } from '../data/villaData';
 
 export default function LonavalaGuide() {
@@ -11,7 +11,7 @@ export default function LonavalaGuide() {
         <div style={{ textAlign: 'center', maxWidth: '780px', margin: '0 auto 60px auto' }}>
           <span className="section-tag">
             <Sparkles size={14} />
-            Villa Location & Directions
+            Location & Guest Reviews
           </span>
           <h2 className="section-title">
             Situated in <span className="text-gold-gradient">Lonavala</span>
@@ -22,14 +22,14 @@ export default function LonavalaGuide() {
 
           <div style={{ marginTop: '20px' }}>
             <a
-              href={villaDetails.googleMapsUrl}
+              href={villaDetails.googleReviewsUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary"
               style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 24px', fontSize: '0.9rem' }}
             >
-              <MapPin size={16} />
-              <span>Open Rishabh Villa in Google Maps</span>
+              <Star size={16} fill="#FBBC05" color="#FBBC05" />
+              <span>Read Rishabh Villa Google Reviews</span>
               <ExternalLink size={15} />
             </a>
           </div>

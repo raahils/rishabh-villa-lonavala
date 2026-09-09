@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sparkles, MapPin, Phone, MessageCircle, ShieldCheck, CheckCircle2, Navigation, ExternalLink } from 'lucide-react';
+import { Sparkles, Star, Phone, MessageCircle, ShieldCheck, CheckCircle2, Navigation, ExternalLink } from 'lucide-react';
 import { villaDetails } from '../data/villaData';
 
 export default function BookingCalculator() {
@@ -99,41 +99,41 @@ export default function BookingCalculator() {
             </div>
           </div>
 
-          {/* Right Column: Google Maps & Guarantees */}
-          <div
-            style={{
-              background: '#fbfbf9',
-              padding: '30px',
-              borderRadius: 'var(--radius-md)',
-              border: '1px solid var(--border-subtle)',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '20px'
-            }}
-          >
-            <div>
-              <div style={{ fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '1.5px', color: 'var(--gold-dark)', fontWeight: 700, marginBottom: '6px' }}>
-                Location
-              </div>
-              <h4 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', color: 'var(--text-main)', fontWeight: 600 }}>
-                Lonavala, Maharashtra
-              </h4>
-              <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', marginTop: '6px', lineHeight: 1.5 }}>
-                Easily accessible via Mumbai-Pune Expressway in Lonavala.
-              </p>
-            </div>
-
-            <a
-              href={villaDetails.googleMapsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-outline"
-              style={{ width: '100%', height: '44px', padding: '0 16px', fontSize: '0.88rem', justifyContent: 'center' }}
+            {/* Right Column: Google Reviews & Guarantees */}
+            <div
+              style={{
+                background: '#fbfbf9',
+                padding: '30px',
+                borderRadius: 'var(--radius-md)',
+                border: '1px solid var(--border-subtle)',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '20px'
+              }}
             >
-              <MapPin size={16} color="var(--gold-dark)" />
-              <span>Open in Google Maps</span>
-              <ExternalLink size={14} />
-            </a>
+              <div>
+                <div style={{ fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '1.5px', color: 'var(--gold-dark)', fontWeight: 700, marginBottom: '6px' }}>
+                  Location
+                </div>
+                <h4 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', color: 'var(--text-main)', fontWeight: 600 }}>
+                  Lonavala, Maharashtra
+                </h4>
+                <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', marginTop: '6px', lineHeight: 1.5 }}>
+                  Easily accessible via Mumbai-Pune Expressway in Lonavala.
+                </p>
+              </div>
+
+              <a
+                href={villaDetails.googleReviewsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-outline"
+                style={{ width: '100%', height: '44px', padding: '0 16px', fontSize: '0.88rem', justifyContent: 'center' }}
+              >
+                <Star size={16} fill="#FBBC05" color="#FBBC05" />
+                <span>Read Google Reviews</span>
+                <ExternalLink size={14} />
+              </a>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', paddingTop: '16px', borderTop: '1px solid var(--border-subtle)', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
