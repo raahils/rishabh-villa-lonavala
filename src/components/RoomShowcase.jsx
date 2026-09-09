@@ -100,13 +100,14 @@ export default function RoomShowcase() {
           style={{
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
             gap: '10px',
             overflowX: 'auto',
             paddingBottom: '12px',
             marginBottom: '40px',
             flexWrap: 'nowrap',
+            width: '100%',
             maxWidth: '100%',
+            boxSizing: 'border-box',
             WebkitOverflowScrolling: 'touch'
           }}
           className="hide-scrollbar mobile-tabs-container"
@@ -158,11 +159,14 @@ export default function RoomShowcase() {
               borderRadius: 'var(--radius-lg)',
               border: '1px solid var(--border-gold)',
               boxShadow: '0 15px 45px rgba(0,0,0,0.04)',
-              marginBottom: '44px'
+              marginBottom: '44px',
+              width: '100%',
+              maxWidth: '100%',
+              boxSizing: 'border-box'
             }}
           >
             {/* Left Column: Seamless Photo Viewer + Thumbnail Strip */}
-            <div>
+            <div style={{ minWidth: 0, width: '100%', maxWidth: '100%' }}>
               <div
                 className="showcase-photo-frame"
                 style={{
@@ -172,7 +176,9 @@ export default function RoomShowcase() {
                   marginBottom: '14px',
                   background: '#111318',
                   border: '1px solid var(--border-subtle)',
-                  boxShadow: '0 12px 32px rgba(0,0,0,0.1)'
+                  boxShadow: '0 12px 32px rgba(0,0,0,0.1)',
+                  width: '100%',
+                  maxWidth: '100%'
                 }}
               >
                 <img
@@ -218,7 +224,10 @@ export default function RoomShowcase() {
                   display: 'flex',
                   gap: '10px',
                   overflowX: 'auto',
-                  paddingBottom: '6px'
+                  paddingBottom: '6px',
+                  width: '100%',
+                  maxWidth: '100%',
+                  boxSizing: 'border-box'
                 }}
                 className="hide-scrollbar"
               >
@@ -247,7 +256,7 @@ export default function RoomShowcase() {
             </div>
 
             {/* Right Column: Photo Details & Category Specs */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '18px', minWidth: 0, width: '100%', maxWidth: '100%' }}>
               <div>
                 <div
                   style={{
@@ -262,43 +271,46 @@ export default function RoomShowcase() {
                     marginBottom: '8px',
                     background: 'rgba(200, 169, 126, 0.12)',
                     padding: '4px 12px',
-                    borderRadius: 'var(--radius-full)'
+                    borderRadius: 'var(--radius-full)',
+                    maxWidth: '100%',
+                    boxSizing: 'border-box',
+                    flexWrap: 'wrap'
                   }}
                 >
                   <Sparkles size={12} color="var(--gold-dark)" />
                   <span>{activePhoto.category} • PHOTO {selectedPhotoIndex + 1} OF {currentCategoryPhotos.length}</span>
                 </div>
 
-                <h3 className="showcase-title" style={{ fontFamily: 'var(--font-serif)', color: '#111318', fontWeight: 600, lineHeight: 1.25, marginTop: '4px' }}>
+                <h3 className="showcase-title" style={{ fontFamily: 'var(--font-serif)', color: '#111318', fontWeight: 600, lineHeight: 1.25, marginTop: '4px', wordBreak: 'break-word' }}>
                   {activePhoto.title}
                 </h3>
               </div>
 
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.6, margin: 0 }}>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.6, margin: 0, wordBreak: 'break-word' }}>
                 {activePhoto.description}
               </p>
 
               {/* Category Highlights */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', paddingTop: '16px', borderTop: '1px solid var(--border-subtle)' }}>
                 {(categoryFeatures[activeCategory] || categoryFeatures.bedrooms).map((feat, idx) => (
-                  <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.9rem', color: 'var(--text-main)', fontWeight: 500 }}>
-                    <div style={{ width: '20px', height: '20px', borderRadius: '50%', background: 'rgba(200,169,126,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <div key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: '0.9rem', color: 'var(--text-main)', fontWeight: 500 }}>
+                    <div style={{ width: '20px', height: '20px', borderRadius: '50%', background: 'rgba(200,169,126,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: '2px' }}>
                       <CheckCircle2 size={13} color="var(--gold-dark)" />
                     </div>
-                    <span>{feat}</span>
+                    <span style={{ flex: 1, wordBreak: 'break-word' }}>{feat}</span>
                   </div>
                 ))}
               </div>
 
               {/* Lightbox CTA Button */}
-              <div style={{ paddingTop: '4px' }}>
+              <div style={{ paddingTop: '4px', width: '100%', maxWidth: '100%' }}>
                 <button
                   onClick={() => setLightboxIndex(selectedPhotoIndex)}
                   className="btn-primary showcase-cta-btn"
-                  style={{ height: '44px', padding: '0 24px', fontSize: '0.88rem' }}
+                  style={{ height: '44px', padding: '0 20px', fontSize: '0.88rem', width: '100%', justifyContent: 'center', whiteSpace: 'normal', boxSizing: 'border-box' }}
                 >
-                  <span>Explore All {currentCategoryPhotos.length} Photos</span>
-                  <ArrowRight size={16} />
+                  <span style={{ textAlign: 'center' }}>Explore All {currentCategoryPhotos.length} Photos</span>
+                  <ArrowRight size={16} style={{ flexShrink: 0 }} />
                 </button>
               </div>
             </div>
@@ -306,7 +318,7 @@ export default function RoomShowcase() {
         )}
 
         {/* Complete Photo Grid for Active Category */}
-        <div className="category-photo-grid">
+        <div className="category-photo-grid" style={{ width: '100%', maxWidth: '100%', boxSizing: 'border-box' }}>
           {currentCategoryPhotos.map((photo, index) => (
             <div
               key={photo.id}
@@ -321,10 +333,13 @@ export default function RoomShowcase() {
                 cursor: 'pointer',
                 border: '1px solid var(--border-gold)',
                 transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-                background: '#ffffff'
+                background: '#ffffff',
+                width: '100%',
+                minWidth: 0,
+                boxSizing: 'border-box'
               }}
             >
-              <div style={{ position: 'relative', height: '220px', overflow: 'hidden', background: '#111318' }}>
+              <div style={{ position: 'relative', height: '220px', overflow: 'hidden', background: '#111318', width: '100%' }}>
                 <img
                   src={photo.src}
                   alt={photo.title}
@@ -360,7 +375,7 @@ export default function RoomShowcase() {
                 </div>
               </div>
 
-              <div style={{ padding: '16px 18px', background: '#ffffff', borderTop: '1px solid var(--border-subtle)' }}>
+              <div style={{ padding: '16px 18px', background: '#ffffff', borderTop: '1px solid var(--border-subtle)', width: '100%', boxSizing: 'border-box' }}>
                 <h4 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.05rem', color: '#111318', fontWeight: 600, marginBottom: '4px' }}>
                   {photo.title}
                 </h4>
@@ -390,6 +405,9 @@ export default function RoomShowcase() {
           -ms-overflow-style: none;
           scrollbar-width: none;
         }
+        .mobile-tabs-container {
+          justify-content: center;
+        }
         .showcase-photo-frame {
           height: 420px;
         }
@@ -402,17 +420,26 @@ export default function RoomShowcase() {
           gap: 24px;
         }
 
+        @media (min-width: 961px) {
+          .mobile-tabs-container {
+            justify-content: center !important;
+          }
+        }
+
         @media (max-width: 960px) {
           .showcase-card-grid {
             grid-template-columns: 1fr !important;
-            padding: 24px !important;
-            gap: 28px !important;
+            padding: 20px !important;
+            gap: 24px !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            box-sizing: border-box !important;
           }
           .showcase-photo-frame {
-            height: 320px !important;
+            height: clamp(220px, 52vw, 320px) !important;
           }
           .showcase-title {
-            font-size: 1.7rem !important;
+            font-size: 1.6rem !important;
           }
           .category-photo-grid {
             grid-template-columns: repeat(2, 1fr) !important;
@@ -420,8 +447,8 @@ export default function RoomShowcase() {
           }
           .mobile-tabs-container {
             justify-content: flex-start !important;
-            padding-left: 10px !important;
-            padding-right: 10px !important;
+            padding-left: 2px !important;
+            padding-right: 16px !important;
           }
           .showcase-cta-btn {
             width: 100% !important;
@@ -431,13 +458,17 @@ export default function RoomShowcase() {
 
         @media (max-width: 640px) {
           .gallery-responsive-section {
-            padding: 48px 0 !important;
+            padding: 36px 0 !important;
+          }
+          .showcase-card-grid {
+            padding: 16px !important;
+            border-radius: var(--radius-md) !important;
           }
           .showcase-photo-frame {
-            height: 260px !important;
+            height: 220px !important;
           }
           .showcase-title {
-            font-size: 1.45rem !important;
+            font-size: 1.35rem !important;
           }
           .category-photo-grid {
             grid-template-columns: 1fr !important;

@@ -9,6 +9,7 @@ export default function FloatingWhatsApp() {
 
   return (
     <div
+      className="floating-whatsapp-container"
       style={{
         position: 'fixed',
         bottom: '28px',
@@ -46,6 +47,7 @@ export default function FloatingWhatsApp() {
         rel="noopener noreferrer"
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
+        className="floating-whatsapp-btn"
         style={{
           position: 'relative',
           width: '60px',
@@ -86,6 +88,20 @@ export default function FloatingWhatsApp() {
         @keyframes fadeIn {
           from { opacity: 0; transform: translateX(8px); }
           to { opacity: 1; transform: translateX(0); }
+        }
+        @media (max-width: 640px) {
+          .floating-whatsapp-container {
+            bottom: 16px !important;
+            right: 14px !important;
+          }
+          .floating-whatsapp-btn {
+            width: 48px !important;
+            height: 48px !important;
+          }
+          .floating-whatsapp-btn svg {
+            width: 24px !important;
+            height: 24px !important;
+          }
         }
       `}</style>
     </div>
