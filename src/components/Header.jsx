@@ -66,7 +66,7 @@ export default function Header() {
             <div style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', fontWeight: 700, color: '#111318', letterSpacing: '0.5px', whiteSpace: 'nowrap' }}>
               RISHABH VILLA
             </div>
-            <div style={{ fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '2px', color: 'var(--gold-dark)', marginTop: '-2px', fontWeight: 700, whiteSpace: 'nowrap' }}>
+            <div className="header-subtitle" style={{ fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '2px', color: 'var(--gold-dark)', marginTop: '-2px', fontWeight: 700, whiteSpace: 'nowrap' }}>
               6 BHK Private Villa • Lonavala
             </div>
           </div>
@@ -99,7 +99,7 @@ export default function Header() {
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexShrink: 0 }}>
           <a
             href={`tel:${villaDetails.contactPhone}`}
-            className="btn-primary"
+            className="btn-primary call-btn"
             style={{
               height: '40px',
               padding: '0 18px',
@@ -107,7 +107,7 @@ export default function Header() {
             }}
           >
             <Phone size={15} />
-            <span>Call Us</span>
+            <span className="call-btn-text">Call Us</span>
           </a>
 
           {/* Mobile Menu Toggle */}
@@ -168,6 +168,16 @@ export default function Header() {
         @media (max-width: 960px) {
           .desktop-nav { display: none !important; }
           .mobile-toggle { display: block !important; }
+        }
+        @media (max-width: 480px) {
+          .header-subtitle { display: none !important; }
+          .call-btn-text { display: none !important; }
+          .btn-primary.call-btn {
+            width: 38px !important;
+            height: 38px !important;
+            padding: 0 !important;
+            border-radius: 50% !important;
+          }
         }
       `}</style>
     </header>
