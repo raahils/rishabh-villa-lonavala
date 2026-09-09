@@ -275,7 +275,7 @@ export const villaPhotos = [
     filename: "PHOTO-2026-09-09-15-37-55 36.jpg",
     title: "Property Aerial Overview",
     category: "ambiance",
-    description: "Bird's-eye aerial perspective of Rishabh Villa in Waksai, Lonavala.",
+    description: "Bird's-eye aerial perspective of Rishabh Villa in Lonavala.",
     isHero: false,
     featured: true
   },

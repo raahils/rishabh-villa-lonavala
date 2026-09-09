@@ -111,7 +111,7 @@ export default function Hero() {
               }}
             >
               <Sun size={14} color="var(--gold-light)" />
-              <span>Waksai, Lonavala</span>
+              <span>Lonavala, Maharashtra</span>
             </div>
 
             <div

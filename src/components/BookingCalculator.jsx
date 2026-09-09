@@ -43,7 +43,7 @@ export default function BookingCalculator() {
             </div>
 
             <p style={{ fontSize: '0.95rem', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
-              Villa No. 7, Ekaant Society, Next to Viola Beacon Resort, Waksai, Lonavala, Maharashtra 410403.
+              Lonavala, Maharashtra, India.
             </p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', marginTop: '10px' }}>
@@ -113,13 +113,13 @@ export default function BookingCalculator() {
           >
             <div>
               <div style={{ fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '1.5px', color: 'var(--gold-dark)', fontWeight: 700, marginBottom: '6px' }}>
-                Location Landmark
+                Location
               </div>
               <h4 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', color: 'var(--text-main)', fontWeight: 600 }}>
-                Next to Viola Beacon Resort
+                Lonavala, Maharashtra
               </h4>
               <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', marginTop: '6px', lineHeight: 1.5 }}>
-                Ekaant Society, Waksai, Lonavala. Easily accessible via expressway.
+                Easily accessible via Mumbai-Pune Expressway in Lonavala.
               </p>
             </div>
 

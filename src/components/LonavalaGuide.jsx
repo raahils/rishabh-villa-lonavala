@@ -14,10 +14,10 @@ export default function LonavalaGuide() {
             Villa Location & Directions
           </span>
           <h2 className="section-title">
-            Situated in <span className="text-gold-gradient">Waksai, Lonavala</span>
+            Situated in <span className="text-gold-gradient">Lonavala</span>
           </h2>
           <p className="section-desc" style={{ margin: '0 auto' }}>
-            Rishabh Villa (Villa No. 7, Ekaant Society, next to Viola Beacon Resort, Waksai, Lonavala 410403) is conveniently accessible via the Mumbai-Pune Expressway exit.
+            Rishabh Villa is conveniently accessible via the Mumbai-Pune Expressway exit in Lonavala.
           </p>
 
           <div style={{ marginTop: '20px' }}>
@@ -54,7 +54,7 @@ export default function LonavalaGuide() {
                 Driving from Mumbai
               </div>
               <div style={{ color: 'var(--text-muted)', fontSize: '0.88rem' }}>
-                82 km • ~1.5 to 2 Hours via Expressway to Waksai Exit
+                82 km • ~1.5 to 2 Hours via Mumbai-Pune Expressway
               </div>
             </div>
           </div>
@@ -76,7 +76,7 @@ export default function LonavalaGuide() {
                 Driving from Pune
               </div>
               <div style={{ color: 'var(--text-muted)', fontSize: '0.88rem' }}>
-                62 km • ~1.2 Hours via Old Mumbai-Pune Highway Waksai
+                62 km • ~1.2 Hours via Old Mumbai-Pune Highway
               </div>
             </div>
           </div>

@@ -1,10 +1,10 @@
 export const villaDetails = {
   name: "Rishabh Villa",
   tagline: "Modern Minimalist Luxury 6 BHK Private Villa in Lonavala",
-  location: "Villa No. 7, Ekaant Society, Next to Viola Beacon Resort, Waksai, Lonavala, Maharashtra 410403",
-  shortLocation: "Waksai, Lonavala (Next to Viola Beacon Resort)",
-  landmark: "Next to Viola Beacon Resort, Ekaant Society",
-  googleMapsUrl: "https://www.google.com/maps?q=Rishabh+Villa,+Lonavala,+Rishabh+Villa,+7,+next+to+Viola+Beacon+Resort,+Waksai,+Ekaant+society,+Lonavala,+Maharashtra+410403",
+  location: "Lonavala, Maharashtra, India",
+  shortLocation: "Lonavala, Maharashtra",
+  landmark: "Lonavala",
+  googleMapsUrl: "https://www.google.com/maps?q=Rishabh+Villa+Lonavala",
   googleReviewsUrl: "https://www.google.com/search?q=rishabh+villa+lonavala+reviews",
   
   contactPhone: "+91 98213 42166",
@@ -40,7 +40,7 @@ export const lonavalaAttractions = [
   { name: "Doorstep Food Delivery", distance: "Direct to Villa", category: "Food Delivery", desc: "Zomato, Swiggy, and local restaurant food delivery available directly to Rishabh Villa." },
   { name: "Proximity to Jain Temples", distance: "5-10 mins", category: "Religious & Pilgrimage", desc: "Convenient access to prominent Jain Temples and Derasars in Lonavala for morning prayers and pure Jain food." },
   { name: "Tiger's Leap / Point", distance: "14 mins (7.2 km)", category: "Viewpoint", desc: "Panoramic cliff view point overlooking Western Ghats mist." },
-  { name: "Karla Caves", distance: "15 mins (8.5 km)", category: "Heritage & History", desc: "Ancient rock-cut Buddhist cave complex in Waksai area." }
+  { name: "Karla Caves", distance: "15 mins (8.5 km)", category: "Heritage & History", desc: "Ancient rock-cut Buddhist cave complex in Lonavala area." }
 ];
 
 export const guestReviews = [
@@ -60,7 +60,7 @@ export const guestReviews = [
     rating: 5,
     avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80",
     title: "Immaculate Cleanliness & Helpful Caretaker",
-    comment: "The property is extremely well-maintained and clean. The location next to Viola Beacon Resort in Waksai is very peaceful and easy to find on Google Maps."
+    comment: "The property is extremely well-maintained and clean. The location in Lonavala is very peaceful and easy to find on Google Maps."
   },
   {
     name: "Pooja & Sameer Joshi",
@@ -69,7 +69,7 @@ export const guestReviews = [
     rating: 5,
     avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
     title: "Awesome Weekend Getaway in Lonavala",
-    comment: "Loved the quiet location in Ekaant Society Waksai. Beautiful pool, spacious garden, and comfortable bedrooms. Highly recommended for group stays in Lonavala."
+    comment: "Loved the quiet location in Lonavala. Beautiful pool, spacious garden, and comfortable bedrooms. Highly recommended for group stays in Lonavala."
   }
 ];
 
