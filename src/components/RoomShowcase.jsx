@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Sparkles, BedDouble, Waves, Utensils, Trees, Camera, Bath, Eye, CheckCircle2, ArrowRight } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import { Sparkles, BedDouble, Waves, Utensils, Trees, Camera, Bath, Eye, CheckCircle2, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { villaPhotos } from '../data/photos';
 import LightboxModal from './LightboxModal';
 
@@ -7,6 +7,10 @@ export default function RoomShowcase() {
   const [activeCategory, setActiveCategory] = useState('bedrooms');
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState(0);
   const [lightboxIndex, setLightboxIndex] = useState(null);
+  
+  const tabsRef = useRef(null);
+  const touchStartRef = useRef(null);
+  const touchEndRef = useRef(null);
 
   const categories = [
     { id: 'bedrooms', label: '6 BHK Bedrooms', icon: BedDouble },
@@ -59,9 +63,53 @@ export default function RoomShowcase() {
   const currentCategoryPhotos = villaPhotos.filter(p => p.category === activeCategory);
   const activePhoto = currentCategoryPhotos[selectedPhotoIndex] || currentCategoryPhotos[0];
 
-  const handleCategoryChange = (catId) => {
+  const handleCategoryChange = (catId, event) => {
     setActiveCategory(catId);
     setSelectedPhotoIndex(0);
+    if (event && event.currentTarget) {
+      event.currentTarget.scrollIntoView({
+        behavior: 'smooth',
+        inline: 'center',
+        block: 'nearest'
+      });
+    }
+  };
+
+  const scrollTabs = (direction) => {
+    if (tabsRef.current) {
+      const scrollAmount = direction === 'left' ? -220 : 220;
+      tabsRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
+
+  const handlePrevPhoto = (e) => {
+    if (e) e.stopPropagation();
+    setSelectedPhotoIndex((prev) => (prev === 0 ? currentCategoryPhotos.length - 1 : prev - 1));
+  };
+
+  const handleNextPhoto = (e) => {
+    if (e) e.stopPropagation();
+    setSelectedPhotoIndex((prev) => (prev === currentCategoryPhotos.length - 1 ? 0 : prev + 1));
+  };
+
+  const handleTouchStart = (e) => {
+    touchStartRef.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchMove = (e) => {
+    touchEndRef.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStartRef.current || !touchEndRef.current) return;
+    const distance = touchStartRef.current - touchEndRef.current;
+    if (distance > 45) {
+      handleNextPhoto();
+    } else if (distance < -45) {
+      handlePrevPhoto();
+    }
+    touchStartRef.current = null;
+    touchEndRef.current = null;
   };
 
   return (
@@ -95,54 +143,92 @@ export default function RoomShowcase() {
           </div>
         </div>
 
-        {/* Category Filter Tabs - Single Line Layout */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '10px',
-            overflowX: 'auto',
-            paddingBottom: '12px',
-            marginBottom: '40px',
-            flexWrap: 'nowrap',
-            width: '100%',
-            maxWidth: '100%',
-            boxSizing: 'border-box',
-            WebkitOverflowScrolling: 'touch'
-          }}
-          className="hide-scrollbar mobile-tabs-container"
-        >
-          {categories.map((cat) => {
-            const isActive = activeCategory === cat.id;
-            const Icon = cat.icon;
-            return (
-              <button
-                key={cat.id}
-                onClick={() => handleCategoryChange(cat.id)}
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  height: '42px',
-                  background: isActive ? 'var(--gold-gradient)' : '#ffffff',
-                  color: isActive ? '#ffffff' : 'var(--text-main)',
-                  border: isActive ? 'none' : '1px solid rgba(200, 169, 126, 0.35)',
-                  padding: '0 18px',
-                  borderRadius: 'var(--radius-full)',
-                  fontWeight: isActive ? 700 : 600,
-                  fontSize: '0.85rem',
-                  cursor: 'pointer',
-                  whiteSpace: 'nowrap',
-                  flexShrink: 0,
-                  transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-                  boxShadow: isActive ? '0 6px 20px rgba(200, 169, 126, 0.35)' : '0 2px 8px rgba(0,0,0,0.03)'
-                }}
-              >
-                <Icon size={16} color={isActive ? '#ffffff' : 'var(--gold-dark)'} />
-                <span>{cat.label}</span>
-              </button>
-            );
-          })}
+        {/* Optimized Category Selector Bar with Sliding Controls */}
+        <div style={{ position: 'relative', width: '100%', marginBottom: '40px' }}>
+          {/* Scroll Left Button */}
+          <button
+            onClick={() => scrollTabs('left')}
+            className="category-scroll-btn scroll-btn-left"
+            aria-label="Scroll left"
+          >
+            <ChevronLeft size={18} color="#111318" />
+          </button>
+
+          {/* Category Filter Tabs - Single Line Layout */}
+          <div
+            ref={tabsRef}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '10px',
+              overflowX: 'auto',
+              paddingBottom: '12px',
+              paddingTop: '4px',
+              flexWrap: 'nowrap',
+              width: '100%',
+              maxWidth: '100%',
+              boxSizing: 'border-box',
+              WebkitOverflowScrolling: 'touch',
+              scrollSnapType: 'x mandatory'
+            }}
+            className="hide-scrollbar mobile-tabs-container"
+          >
+            {categories.map((cat) => {
+              const isActive = activeCategory === cat.id;
+              const Icon = cat.icon;
+              const photoCount = villaPhotos.filter(p => p.category === cat.id).length;
+
+              return (
+                <button
+                  key={cat.id}
+                  onClick={(e) => handleCategoryChange(cat.id, e)}
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    height: '44px',
+                    background: isActive ? 'var(--gold-gradient)' : '#ffffff',
+                    color: isActive ? '#ffffff' : 'var(--text-main)',
+                    border: isActive ? 'none' : '1px solid rgba(200, 169, 126, 0.35)',
+                    padding: '0 20px',
+                    borderRadius: 'var(--radius-full)',
+                    fontWeight: isActive ? 700 : 600,
+                    fontSize: '0.86rem',
+                    cursor: 'pointer',
+                    whiteSpace: 'nowrap',
+                    flexShrink: 0,
+                    scrollSnapAlign: 'center',
+                    transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+                    boxShadow: isActive ? '0 6px 20px rgba(200, 169, 126, 0.38)' : '0 2px 8px rgba(0,0,0,0.03)'
+                  }}
+                >
+                  <Icon size={16} color={isActive ? '#ffffff' : 'var(--gold-dark)'} />
+                  <span>{cat.label}</span>
+                  <span
+                    style={{
+                      fontSize: '0.72rem',
+                      opacity: isActive ? 0.9 : 0.6,
+                      background: isActive ? 'rgba(255,255,255,0.22)' : 'rgba(0,0,0,0.06)',
+                      padding: '2px 7px',
+                      borderRadius: 'var(--radius-full)',
+                      fontWeight: 700
+                    }}
+                  >
+                    {photoCount}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Scroll Right Button */}
+          <button
+            onClick={() => scrollTabs('right')}
+            className="category-scroll-btn scroll-btn-right"
+            aria-label="Scroll right"
+          >
+            <ChevronRight size={18} color="#111318" />
+          </button>
         </div>
 
         {/* Refined Interactive Featured Showcase Card */}
@@ -169,6 +255,9 @@ export default function RoomShowcase() {
             <div style={{ minWidth: 0, width: '100%', maxWidth: '100%' }}>
               <div
                 className="showcase-photo-frame"
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
                 style={{
                   position: 'relative',
                   borderRadius: 'var(--radius-md)',
@@ -178,7 +267,8 @@ export default function RoomShowcase() {
                   border: '1px solid var(--border-subtle)',
                   boxShadow: '0 12px 32px rgba(0,0,0,0.1)',
                   width: '100%',
-                  maxWidth: '100%'
+                  maxWidth: '100%',
+                  userSelect: 'none'
                 }}
               >
                 <img
@@ -191,6 +281,26 @@ export default function RoomShowcase() {
                     transition: 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)'
                   }}
                 />
+
+                {/* Left Floating Photo Prev Arrow */}
+                <button
+                  onClick={handlePrevPhoto}
+                  className="photo-overlay-arrow arrow-left"
+                  aria-label="Previous photo"
+                >
+                  <ChevronLeft size={20} color="#111318" />
+                </button>
+
+                {/* Right Floating Photo Next Arrow */}
+                <button
+                  onClick={handleNextPhoto}
+                  className="photo-overlay-arrow arrow-right"
+                  aria-label="Next photo"
+                >
+                  <ChevronRight size={20} color="#111318" />
+                </button>
+
+                {/* Fullscreen Button */}
                 <button
                   onClick={() => setLightboxIndex(selectedPhotoIndex)}
                   style={{
@@ -419,6 +529,62 @@ export default function RoomShowcase() {
           grid-template-columns: repeat(3, 1fr);
           gap: 24px;
         }
+        .category-scroll-btn {
+          position: absolute;
+          top: 42%;
+          transform: translateY(-50%);
+          z-index: 10;
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
+          background: #ffffff;
+          border: 1px solid var(--border-gold);
+          box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+        .category-scroll-btn:hover {
+          background: #f7f6f0;
+          transform: translateY(-50%) scale(1.08);
+        }
+        .scroll-btn-left {
+          left: -14px;
+        }
+        .scroll-btn-right {
+          right: -14px;
+        }
+        .photo-overlay-arrow {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          z-index: 5;
+          width: 38px;
+          height: 38px;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.92);
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
+          border: 1px solid var(--border-gold);
+          box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+        .photo-overlay-arrow:hover {
+          background: #ffffff;
+          transform: translateY(-50%) scale(1.1);
+        }
+        .arrow-left {
+          left: 12px;
+        }
+        .arrow-right {
+          right: 12px;
+        }
 
         @media (min-width: 961px) {
           .mobile-tabs-container {
@@ -427,6 +593,9 @@ export default function RoomShowcase() {
         }
 
         @media (max-width: 960px) {
+          .category-scroll-btn {
+            display: none !important;
+          }
           .showcase-card-grid {
             grid-template-columns: 1fr !important;
             padding: 20px !important;
@@ -466,6 +635,16 @@ export default function RoomShowcase() {
           }
           .showcase-photo-frame {
             height: 220px !important;
+          }
+          .photo-overlay-arrow {
+            width: 32px !important;
+            height: 32px !important;
+          }
+          .arrow-left {
+            left: 8px !important;
+          }
+          .arrow-right {
+            right: 8px !important;
           }
           .showcase-title {
             font-size: 1.35rem !important;
