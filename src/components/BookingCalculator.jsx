@@ -22,16 +22,12 @@ export default function BookingCalculator() {
         </div>
 
         <div
-          className="glass-card"
+          className="glass-card booking-card-grid"
           style={{
-            padding: '44px',
             background: '#ffffff',
             border: '1px solid var(--border-gold)',
             borderRadius: 'var(--radius-lg)',
             boxShadow: '0 20px 45px rgba(0,0,0,0.05)',
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: '36px',
             alignItems: 'center'
           }}
         >
@@ -154,6 +150,22 @@ export default function BookingCalculator() {
         </div>
 
       </div>
+
+      <style>{`
+        .booking-card-grid {
+          padding: 44px;
+          display: grid;
+          grid-template-columns: 1.2fr 1fr;
+          gap: 36px;
+        }
+        @media (max-width: 840px) {
+          .booking-card-grid {
+            grid-template-columns: 1fr !important;
+            padding: 22px !important;
+            gap: 24px !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

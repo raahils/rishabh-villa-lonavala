@@ -32,19 +32,15 @@ export default function Overview() {
 
         {/* Stats Strip */}
         <div
-          className="glass-card"
+          className="glass-card stats-grid-strip"
           style={{
-            padding: '30px 40px',
             marginBottom: '60px',
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-            gap: '30px',
             textAlign: 'center',
             background: '#ffffff',
             border: '1px solid var(--border-gold)'
           }}
         >
-          <div>
+          <div className="stat-box">
             <div style={{ fontFamily: 'var(--font-serif)', fontSize: '2.5rem', fontWeight: 700, color: 'var(--gold-dark)' }}>
               6 BHK
             </div>
@@ -52,7 +48,7 @@ export default function Overview() {
               Ensuite Bedrooms
             </div>
           </div>
-          <div style={{ borderLeft: '1px solid var(--border-subtle)' }}>
+          <div className="stat-box stat-box-border">
             <div style={{ fontFamily: 'var(--font-serif)', fontSize: '2.5rem', fontWeight: 700, color: 'var(--gold-dark)' }}>
               15 - 25
             </div>
@@ -60,7 +56,7 @@ export default function Overview() {
               Guest Capacity
             </div>
           </div>
-          <div style={{ borderLeft: '1px solid var(--border-subtle)' }}>
+          <div className="stat-box stat-box-border">
             <div style={{ fontFamily: 'var(--font-serif)', fontSize: '2.5rem', fontWeight: 700, color: 'var(--gold-dark)' }}>
               Private Pool
             </div>
@@ -68,7 +64,7 @@ export default function Overview() {
               Exclusive Deck
             </div>
           </div>
-          <div style={{ borderLeft: '1px solid var(--border-subtle)' }}>
+          <div className="stat-box stat-box-border">
             <div style={{ fontFamily: 'var(--font-serif)', fontSize: '2.5rem', fontWeight: 700, color: 'var(--gold-dark)' }}>
               4.95 ★
             </div>
@@ -121,6 +117,28 @@ export default function Overview() {
         </div>
 
       </div>
+
+      <style>{`
+        .stats-grid-strip {
+          padding: 30px 40px;
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 20px;
+        }
+        .stat-box-border {
+          border-left: 1px solid var(--border-subtle);
+        }
+        @media (max-width: 840px) {
+          .stats-grid-strip {
+            grid-template-columns: repeat(2, 1fr) !important;
+            padding: 20px 14px !important;
+            gap: 16px !important;
+          }
+          .stat-box-border {
+            border-left: none !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

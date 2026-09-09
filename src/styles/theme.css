@@ -35,14 +35,17 @@
   --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Reset & Base Settings */
+/* Strict Layout Reset to Prevent Horizontal Scrolling or Screen Wobble */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-html {
+html, body, #root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden !important;
   scroll-behavior: smooth;
   font-family: var(--font-sans);
   background-color: var(--bg-light);
@@ -51,14 +54,10 @@ html {
   -webkit-font-smoothing: antialiased;
 }
 
-body {
-  overflow-x: hidden;
-  background-color: var(--bg-light);
-}
-
 /* Custom Light Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
   background: #f4f3ec;
@@ -67,15 +66,14 @@ body {
   background: #c8a97e;
   border-radius: 4px;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: #9e7d50;
-}
 
-/* Container */
+/* Container Settings */
 .container {
-  max-width: 1320px;
+  width: 100%;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 20px;
+  box-sizing: border-box;
 }
 
 /* Typography Utilities */
@@ -94,7 +92,7 @@ body {
   align-items: center;
   gap: 8px;
   text-transform: uppercase;
-  letter-spacing: 3px;
+  letter-spacing: 2px;
   font-size: 0.75rem;
   font-weight: 700;
   color: var(--gold-dark);
@@ -102,12 +100,12 @@ body {
   border: 1px solid var(--border-gold);
   padding: 6px 16px;
   border-radius: var(--radius-full);
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .section-title {
   font-family: var(--font-serif);
-  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-size: clamp(1.85rem, 4vw, 3.2rem);
   font-weight: 600;
   line-height: 1.2;
   color: var(--text-main);
@@ -116,9 +114,9 @@ body {
 
 .section-desc {
   color: var(--text-muted);
-  font-size: clamp(1rem, 1.4vw, 1.12rem);
+  font-size: clamp(0.92rem, 1.4vw, 1.1rem);
   max-width: 680px;
-  line-height: 1.7;
+  line-height: 1.65;
 }
 
 /* Luxury Light Cards */
@@ -128,6 +126,8 @@ body {
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-card);
   transition: var(--transition-smooth);
+  box-sizing: border-box;
+  max-width: 100%;
 }
 
 .glass-card:hover {
@@ -155,6 +155,7 @@ body {
   text-decoration: none;
   box-shadow: 0 4px 18px rgba(200, 169, 126, 0.35);
   white-space: nowrap;
+  box-sizing: border-box;
 }
 
 .btn-primary:hover {
@@ -180,6 +181,7 @@ body {
   transition: var(--transition-fast);
   text-decoration: none;
   white-space: nowrap;
+  box-sizing: border-box;
 }
 
 .btn-outline:hover {
@@ -191,35 +193,36 @@ body {
 
 /* Section Spacing */
 .section-padding {
-  padding: 100px 0;
+  padding: clamp(44px, 7vw, 90px) 0;
 }
 
 /* Responsive Grid helpers */
 .grid-2 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 32px;
+  gap: 28px;
 }
 
 .grid-3 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
+  gap: 24px;
 }
 
 .grid-4 {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+  gap: 20px;
 }
 
 @media (max-width: 1024px) {
   .grid-4 { grid-template-columns: repeat(2, 1fr); }
   .grid-3 { grid-template-columns: repeat(2, 1fr); }
-  .section-padding { padding: 70px 0; }
+  .container { padding: 0 18px; }
 }
 
 @media (max-width: 768px) {
   .grid-4, .grid-3, .grid-2 { grid-template-columns: 1fr; }
-  .section-padding { padding: 50px 0; }
+  .container { padding: 0 16px; }
+  .glass-card { padding: 20px !important; }
 }
