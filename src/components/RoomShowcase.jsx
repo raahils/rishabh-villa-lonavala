@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { Sparkles, BedDouble, Waves, Utensils, Trees, Camera, Bath, Eye, CheckCircle2, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { villaPhotos } from '../data/photos';
 import LightboxModal from './LightboxModal';
+import { trackEvent } from '../utils/analyticsTracker';
 
 export default function RoomShowcase() {
   const [activeCategory, setActiveCategory] = useState('bedrooms');
@@ -11,6 +12,16 @@ export default function RoomShowcase() {
   const tabsRef = useRef(null);
   const touchStartRef = useRef(null);
   const touchEndRef = useRef(null);
+
+  const handleOpenLightbox = (index) => {
+    setLightboxIndex(index);
+    if (index !== null && currentCategoryPhotos[index]) {
+      trackEvent('photo_view', 'Photo Lightbox Opened', {
+        title: currentCategoryPhotos[index].title,
+        category: currentCategoryPhotos[index].category
+      });
+    }
+  };
 
   const categories = [
     { id: 'bedrooms', label: '6 BHK Bedrooms', icon: BedDouble },
@@ -302,7 +313,7 @@ export default function RoomShowcase() {
 
                 {/* Fullscreen Button */}
                 <button
-                  onClick={() => setLightboxIndex(selectedPhotoIndex)}
+                  onClick={() => handleOpenLightbox(selectedPhotoIndex)}
                   style={{
                     position: 'absolute',
                     bottom: '14px',
@@ -415,7 +426,7 @@ export default function RoomShowcase() {
               {/* Lightbox CTA Button */}
               <div style={{ paddingTop: '4px', width: '100%', maxWidth: '100%' }}>
                 <button
-                  onClick={() => setLightboxIndex(selectedPhotoIndex)}
+                  onClick={() => handleOpenLightbox(selectedPhotoIndex)}
                   className="btn-primary showcase-cta-btn"
                   style={{ height: '44px', padding: '0 20px', fontSize: '0.88rem', width: '100%', justifyContent: 'center', whiteSpace: 'normal', boxSizing: 'border-box' }}
                 >
@@ -432,7 +443,7 @@ export default function RoomShowcase() {
           {currentCategoryPhotos.map((photo, index) => (
             <div
               key={photo.id}
-              onClick={() => setLightboxIndex(index)}
+              onClick={() => handleOpenLightbox(index)}
               className="glass-card"
               style={{
                 position: 'relative',

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Phone, Menu, X } from 'lucide-react';
 import { villaDetails } from '../data/villaData';
+import { trackEvent } from '../utils/analyticsTracker';
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -99,6 +100,7 @@ export default function Header() {
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexShrink: 0 }}>
           <a
             href={`tel:${villaDetails.contactPhone}`}
+            onClick={() => trackEvent('phone_call', 'Header Call Button')}
             className="btn-primary call-btn"
             style={{
               height: '40px',

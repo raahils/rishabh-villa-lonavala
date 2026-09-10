@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sparkles, MapPin, Phone, Mail, Camera, MessageCircle, ArrowUp, ExternalLink } from 'lucide-react';
+import { MapPin, Phone, Mail, MessageCircle, ArrowUp, ExternalLink } from 'lucide-react';
 import { villaDetails } from '../data/villaData';
 
 export default function Footer() {

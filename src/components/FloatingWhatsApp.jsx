@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { MessageCircle } from 'lucide-react';
 import { villaDetails } from '../data/villaData';
+import { trackEvent } from '../utils/analyticsTracker';
 
 export default function FloatingWhatsApp() {
   const [hovered, setHovered] = useState(false);
@@ -45,6 +46,7 @@ export default function FloatingWhatsApp() {
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={() => trackEvent('whatsapp_click', 'Floating WhatsApp FAB')}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         className="floating-whatsapp-btn"
